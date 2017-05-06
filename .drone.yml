@@ -15,12 +15,15 @@ build:
     when:
       event: [push, tag]
 
-compose:
-  database:
-    image: mysql
+services:
+  postgres:
+    image: postgres:9.4.5
     environment:
-      - MYSQL_ROOT_PASSWORD=tannv
-      - MYSQL_USER=tannv
-      - MYSQL_DATABASE=tools
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - POSTGRES_USER=postgres
+  mysql:
+    image: mysql:5.6.27
+    environment:
+      - MYSQL_DATABASE=test
+      - MYSQL_USER =tannv
+      - MYSQL_PASSWORD=tannv
 debug: true
