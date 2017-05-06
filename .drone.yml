@@ -10,6 +10,4 @@ build:
          - mvn surefire-report:report-only
          - echo "Build has been completed."
 
-      when:
-       event: [push, tag]
 debug: true
