@@ -14,12 +14,4 @@ build:
 
       when:
        event: [push, tag]
-
-compose:
-  database:
-    image: mysql:5.7
-    environment:
-      - MYSQL_DATABASE=tools
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-
 debug: true
