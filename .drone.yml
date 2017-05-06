@@ -5,11 +5,14 @@ build:
   main:
     image: maven:3-jdk-8-onbuild
     commands:
-      - mvn clean install -Dmaven.repo.local=/drone/.m2
-      - echo "Build has been completed."
-      - mvn surefire-report:report-only
+      - mvn surefire-report:report
       - echo "Create Reports has been completed."
       - cp target/site/tools.html .framgia-ci-reports/tools.html
     when:
       event: [push, tag]
+report:
+  # regex syntax to extract values
+  source:
+    - path/to/file.txt
+    - path/to/folder/ #
 debug: true
