@@ -8,7 +8,7 @@
     <groupId>com.tannv</groupId>
     <artifactId>tools</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>DavidTools- ${project.artifactId}</name>
+    <name>DavidTools</name>
     <url>http://david.tan.com</url>
     <packaging>war</packaging>
 
@@ -126,16 +126,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.20</version>
-                <executions>
-                    <execution>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report-only</goal>
-                        </goals>
-                    </execution>
-
-                </executions>
+                <version>2.19.1</version>
+                <configuration>
+                <outputName>${artifactId}</outputName>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -154,20 +148,4 @@
             </plugin>
         </plugins>
     </build>
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.20</version>
-            <reportSets>
-                <reportSet>
-                    <reports>
-                        <report>report-only</report>
-                    </reports>
-                </reportSet>
-            </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
 </project>

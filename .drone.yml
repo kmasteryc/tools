@@ -5,9 +5,9 @@ build:
   main:
     image: maven:3-jdk-8-onbuild
     commands:
-      - mvn test -Dmaven.repo.local=/drone/.m2
+      - mvn clean install -Dmaven.repo.local=/drone/.m2
       - echo "Build has been completed."
-      - mvn surefire-report:report -DoutputDirectory=.framgia-ci-reports
+      - mvn surefire-report:report-only
       - echo "Create Reports has been completed."
     when:
       event: [push, tag]
