@@ -2,18 +2,25 @@ cache:
   mount:
     - /drone/.m2
 build:
-  main:
-    image: maven:3-jdk-8-onbuild
-    commands:
-      - mvn surefire-report:report
-      - echo "Create Reports has been completed."
-      - cp target/site/tools.html .framgia-ci-reports/tools.html
-      - framgia-ci run
+  image: maven:3-jdk-8-onbuild
+  commands:
+    - sleep 15
+    - mysql -u root -h 127.0.0.1:3306
+    - mvn clean install -DskipTests
+    - mvn surefire-report:report
+    - echo "Create Reports has been completed."
+
     when:
       event: [push, tag]
-report:
-  # regex syntax to extract values
-  source:
-    - path/to/file.txt
-    - path/to/folder/ #
+      branch: master
+
+compose:
+  database:
+     image: mysql:5.7
+      entrypoint: [ "mysqld" ]
+      command: [ "--character-set-server=utf8mb4" ]
+    environment:
+      - MYSQL_DATABASE=tools
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+
 debug: true
