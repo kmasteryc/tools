@@ -5,13 +5,12 @@ build:
   main:
     image: maven:3-jdk-8-onbuild
     commands:
-      - sleep 15
-      - mysql -u tannv -p tannv -h localhost:3306
       - mvn clean install -Pcoverage -Dmaven.repo.local=/drone/.m2
       - mvn package -Dmaven.repo.local=/drone/.m2
       - mvn test -Dmaven.repo.local=/drone/.m2
       - echo "Build has been completed."
       - mvn surefire-report:report
+      - cp target/site/tools.html .framgia-ci-reports/tools.html
     when:
       event: [push, tag]
 
