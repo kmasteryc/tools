@@ -8,6 +8,7 @@ build:
       - mvn surefire-report:report
       - echo "Create Reports has been completed."
       - cp target/site/tools.html .framgia-ci-reports/tools.html
+      - framgia-ci run
     when:
       event: [push, tag]
 report:
