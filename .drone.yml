@@ -1,0 +1,14 @@
+cache:
+  mount:
+    - /drone/.m2
+build:
+  main:
+    image: maven:3-jdk-8-onbuild
+    commands:
+      - mvn test -Dmaven.repo.local=/drone/.m2
+      - echo "Build has been completed."
+      - mvn surefire-report:report -DoutputDirectory=.framgia-ci-reports
+      - echo "Create Reports has been completed."
+    when:
+      event: [push, tag]
+debug: true
