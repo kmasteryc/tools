@@ -2,11 +2,11 @@
 <html>
 <head>
     <link rel="stylesheet" href="<spring:theme code='stylesheet'/>" type="text/css" />
-    <title>Spring MVC ThemeResolver Example</title>
+    <title>Home pages</title>
 </head>
 <body>
 
-<h3>Spring MVC ThemeResolver Example</h3>
+<h3>Tools </h3>
 theme: <a href="?theme=bright">bright</a> | <a href="?theme=dark">dark</a>
 
 </body>
