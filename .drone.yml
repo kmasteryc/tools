@@ -5,6 +5,8 @@ build:
   main:
     image: maven:3-jdk-8-onbuild
     commands:
+      - sleep 15
+      - mysql -u tannv -p tannv -h localhost:3306
       - mvn clean install -Pcoverage -Dmaven.repo.local=/drone/.m2
       - mvn package -Dmaven.repo.local=/drone/.m2
       - mvn test -Dmaven.repo.local=/drone/.m2
@@ -12,4 +14,13 @@ build:
       - mvn surefire-report:report
     when:
       event: [push, tag]
+
+compose:
+  database:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=tannv
+      - MYSQL_USER=tannv
+      - MYSQL_DATABASE=tools
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
 debug: true
