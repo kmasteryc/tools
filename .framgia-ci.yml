@@ -1,0 +1,7 @@
+project_type: java
+test:
+ mvn:
+   ignore: true
+   command:
+    - mvn clean surefire-report:report -X
+    - cp target/site/tools.html .framgia-ci-reports/tools.html
