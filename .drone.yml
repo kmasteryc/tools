@@ -9,7 +9,7 @@ build:
   publish:
     image: tannv85/tomcat8
     commands:
-      - framgia-ci run
+      - framgia-ci run -d -p 8080:8080 -p 8009:8009 -v target:/opt/tomcat/webapps
     when:
       branch: master
       event: push
