@@ -5,9 +5,7 @@ build:
   main:
     image: maven:3-jdk-8-onbuild
     commands:
-      - mvn clean install -Pcoverage -Dmaven.repo.local=/drone/.m2
-      - mvn package -Dmaven.repo.local=/drone/.m2
-      - mvn test -Dmaven.repo.local=/drone/.m2
+      - mvn clean install -DskipTests -Dmaven.repo.local=/drone/.m2
       - echo "Build has been completed."
       - mvn surefire-report:report
       - cp target/site/tools.html .framgia-ci-reports/tools.html
@@ -15,10 +13,6 @@ build:
       event: [push, tag]
 
 services:
-  postgres:
-    image: postgres:9.4.5
-    environment:
-      - POSTGRES_USER=postgres
   mysql:
     image: mysql:5.6.27
     environment:
