@@ -1,18 +1,24 @@
 build:
   test:
-    image: maven:3-jdk-8-onbuild
+    image: tannv85/maven3.9-jdk8
+    volumes:
+      - target:/opt/tomcat/webapps
     commands:
       - mvn surefire-report:report
-      - cp target/site/tools.html .framgia-ci-reports/tools.html
+      - framgia-ci run
     when:
       event: [push, tag, pull_request]
-  publish:
-    image: tannv85/tomcat8
-    commands:
-      - framgia-ci run -d -p 8080:8080 -p 8009:8009 -v target:/opt/tomcat/webapps
-    when:
-      branch: master
-      event: push
+
+compose:
+  database:
+    image: mysql
+    expose:
+      - "3306"
+    environment:
+      MYSQL_DATABASE: demo_db
+      MYSQL_USER: demo_user
+      MYSQL_PASSWORD: demo_pw
+      MYSQL_ROOT_PASSWORD: root
 
 cache:
   mount:
