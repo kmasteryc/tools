@@ -9,16 +9,16 @@ build:
     when:
       event: [push, tag, pull_request]
 
-compose:
-  database:
-    image: mysql
-    expose:
-      - "3306"
-    environment:
-      MYSQL_DATABASE: demo_db
-      MYSQL_USER: demo_user
-      MYSQL_PASSWORD: demo_pw
-      MYSQL_ROOT_PASSWORD: root
+# compose:
+#   database:
+#     image: mysql
+#     expose:
+#       - "3306"
+#     environment:
+#       MYSQL_DATABASE: demo_db
+#       MYSQL_USER: demo_user
+#       MYSQL_PASSWORD: demo_pw
+#       MYSQL_ROOT_PASSWORD: root
 
 cache:
   mount:
